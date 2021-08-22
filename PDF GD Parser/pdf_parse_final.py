@@ -21,7 +21,6 @@ def get_names_list():
 
     return name_list
 
-
 def get_lines_from_pdf(path):
     """
     Первая версия. Отсеевание идёт с права на лево
@@ -82,7 +81,6 @@ def get_lines_from_pdf_v2(path):
     
     pdf_file.close()
     return result
-
 
 def change_empty_name(last,current):
     """
