@@ -1,3 +1,7 @@
+"""
+Данный скрипт необходим для выборки запчастей из каталогов GD, которые лежат вместе с 
+электросхемами. 
+"""
 import PyPDF2
 import re, os
 import io
@@ -5,7 +9,9 @@ from openpyxl import Workbook
 
 
 def get_names_list():
+    """
     #Смотрим какие файлы есть в текущем каталоге
+    """
     name_list = []
     for name in os.listdir():
         if 'Liste' in name: # Если в имени есть Liste - значит это наш клиент
@@ -16,7 +22,11 @@ def get_names_list():
 
 
 def get_lines_from_pdf(path):
-    # Парсим построчно пдф файл и отсееваем мусор
+    """
+    Первая версия. Отсеевание идёт с права на лево
+    Парсим пдф файл и в соответствии с его форматированием вытаскиваем нужные данные
+    Естесственно подходит только для имеющихся каталогов GD
+    """
     pdfFile = open(path,'rb')
     prdReader = PyPDF2.PdfFileReader(pdfFile)
     num = prdReader.getNumPages()
@@ -43,9 +53,11 @@ def get_lines_from_pdf(path):
     return result
 
 def get_lines_from_pdf_v2(path):
-
-    # Парсим построчно пдф файл и отсееваем мусор
-    
+    """
+    Вторая версия, актуальная. Отсеевание идёт с лева на право.
+    Парсим пдф файл и в соответствии с его форматированием вытаскиваем нужные данные
+    Естесственно подходит только для имеющихся каталогов GD
+    """
     pdfFile = open(path,'rb')
     prdReader = PyPDF2.PdfFileReader(pdfFile)
     num = prdReader.getNumPages()
@@ -72,11 +84,24 @@ def get_lines_from_pdf_v2(path):
 
 
 def change_empty_name(last,current):
+    """
+    Во время обработки(да и в оригинальном файле) после названия компонента идут строки,
+    которые начинаются с "". Здесь мы заподняем эти строки предидущим названием. Необходимо,
+    что бы в дальнейшем нормально фильтровалос в Excel.
+
+    До:
+    11AB13      Sensor  Phoenix
+                Cable   Cable
+                Socket  3x5
+
+    После:
+    11AB13      Sensor  Phoenix
+    11AB13      Cable   Cable
+    11AB13      Socket  3x5
+
+    """
     new_line_with_name = ' ' + last.split()[0] + current[len(last.split()[0])+1:]
     return new_line_with_name
-
-#get_lines_from_pdf_v2('FR1618503_002_78_Liste_Catalogo.pdf')
-
 
 print('Создаём папку Export в корневом каталоге\n')
 os.mkdir('Export')
@@ -93,7 +118,3 @@ for path in get_names_list():
         pass
 
     wb.save(f'.\Export\{path}.xlsx')
-
-###get_lines_from_pdf(path2)    
-##get_lines_from_pdf(path3)    
-##                                        
