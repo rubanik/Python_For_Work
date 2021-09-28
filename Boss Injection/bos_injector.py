@@ -9,6 +9,7 @@ import pyodbc
 n = 24
 person_name = 'arubanik'
 person_id = 50510636
+shift = 'Day'
 
 listOfCommitments = ['Сделал замечание.',
                     'Обратная связь получена',
@@ -112,7 +113,7 @@ def getGood(listOfGoodPattern):
                     int(currDate.strftime("%Y")),             # AuditYear ГОД АУДИТА
                     person_name,                               # LogUser КТО ЗАЛОГИНЕН
                     getLoginDate(currDate),                   # LogDate КОГДА ЗАЛОГИНЕН
-                    'Day'                                     # AuditShift СМЕНА - ВСЕГДА 'Day'
+                    shift                                     # AuditShift СМЕНА - ВСЕГДА 'Day'
                     ]
      return goodList
 
@@ -143,7 +144,7 @@ def getBad(listOfBadPattern):
                     int(currDate.strftime("%Y")),             # AuditYear ГОД АУДИТА
                     person_name,                               # LogUser КТО ЗАЛОГИНЕН
                      getLoginDate(currDate),                  # LogDate КОГДА ЗАЛОГИНЕН
-                    'Day'                                     # AuditShift СМЕНА - ВСЕГДА 'Day'
+                    shift                                     # AuditShift СМЕНА - ВСЕГДА 'Day'
                     ]
      return badList
 
