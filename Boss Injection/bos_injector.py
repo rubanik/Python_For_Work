@@ -88,64 +88,66 @@ def getFinishList(good, bad):
 
 
 def getGood(listOfGoodPattern):
-     goodList = [  makeItPast(currDate,getDelta()).date(),   # AuditDate ДАТА АУДИТА
-                    makeItPast(currDate,getDelta()).time().strftime('%H:%M'),   # AuditTime ВРЕМЯ АУДИТА
-                    person_id,                                 # ObserverID ТАБЕЛЬНЫЙ НОМЕР - ВСЕГДА 50510636
-                    28,                                       # ObsDepartmentID ДЕПАРТАМЕНТ В КОТОРОМ РАБОТАЮ - ВСЕГДА 28
-                    27,                                       # ObsOpenCellID ЯЧЕЙКА К КОТОРОЙ ЗАКРЕПЛЁН - ВСЕГДА 0
-                    2,                                        # PerfDepartmentID ГДЕ ПРОВОДИЛСЯ АУДИТ - ВСЕГДА 2 
-                    0,                                        # PerfJobID ДОЛЖНОСТЬ ТОГО КОГО НАБЛЮДАЕМ - ВСЕГДА 0
-                    1,                                        # PerfTypeID ТИП РАБОТНИКА - ВСЕГДА 1
-                    None,                                     # PerfopenCellID ВСЕГДА NONE
-                    '',                                       # ContractorName ИМЯ - ВСЕГДА ""
-                    4,                                        # AuditZone ЗОНА ПРОВЕДЕНИЯ АУДИТА 
-                    listOfGoodPattern[0],                     # AuditPlace МЕСТО ПРОВЕДЕНИЯ АУДИТА
-                    listOfGoodPattern[1],                     # ViolIndex БЕЗОПАНЫЙ(0) ИЛИ НЕ БЕЗОПАСНЫЙ(1)
-                    listOfGoodPattern[2],                     # ViolTypeID ГРУППА К КОТОРОЙ ОТНОСИТСЯ НАРУШЕНИЕ
-                    listOfGoodPattern[3],                     # ViolationID ТИП НАРУШЕНИЯ
-                    0,                                        # PrimReasonID ВИД НАРУШЕНИЯ
-                    0,                                        # SysReasonID ПРИЧИНА ВОЗНИКНОВЕНИЯ НАРУШЕНИЯ
-                    '',                                       # Comments КОМЕНТАРИЙ
-                    '',                                       # Commitment ДОГОВОРЁННОСТЬ
-                    '',                                       # Gratitude БЛАГОДАРНОСТЬ
-                    int(currDate.strftime("%W")),             # AuditWeek НЕДЕЛЯ АУДИТА
-                    int(currDate.strftime("%m")),             # AuditMonth МЕСЯЦ АУДИТА
-                    int(currDate.strftime("%Y")),             # AuditYear ГОД АУДИТА
-                    person_name,                               # LogUser КТО ЗАЛОГИНЕН
-                    getLoginDate(currDate),                   # LogDate КОГДА ЗАЛОГИНЕН
-                    shift                                     # AuditShift СМЕНА - ВСЕГДА 'Day'
-                    ]
+     goodList = [
+        makeItPast(currDate,getDelta()).date(),   # AuditDate ДАТА АУДИТА
+        makeItPast(currDate,getDelta()).time().strftime('%H:%M'),   # AuditTime ВРЕМЯ АУДИТА
+        person_id,                                # ObserverID ТАБЕЛЬНЫЙ НОМЕР - ВСЕГДА 50510636
+        28,                                       # ObsDepartmentID ДЕПАРТАМЕНТ В КОТОРОМ РАБОТАЮ - ВСЕГДА 28
+        27,                                       # ObsOpenCellID ЯЧЕЙКА К КОТОРОЙ ЗАКРЕПЛЁН - ВСЕГДА 0
+        2,                                        # PerfDepartmentID ГДЕ ПРОВОДИЛСЯ АУДИТ - ВСЕГДА 2 
+        0,                                        # PerfJobID ДОЛЖНОСТЬ ТОГО КОГО НАБЛЮДАЕМ - ВСЕГДА 0
+        1,                                        # PerfTypeID ТИП РАБОТНИКА - ВСЕГДА 1
+        None,                                     # PerfopenCellID ВСЕГДА NONE
+        '',                                       # ContractorName ИМЯ - ВСЕГДА ""
+        4,                                        # AuditZone ЗОНА ПРОВЕДЕНИЯ АУДИТА 
+        listOfGoodPattern[0],                     # AuditPlace МЕСТО ПРОВЕДЕНИЯ АУДИТА
+        listOfGoodPattern[1],                     # ViolIndex БЕЗОПАНЫЙ(0) ИЛИ НЕ БЕЗОПАСНЫЙ(1)
+        listOfGoodPattern[2],                     # ViolTypeID ГРУППА К КОТОРОЙ ОТНОСИТСЯ НАРУШЕНИЕ
+        listOfGoodPattern[3],                     # ViolationID ТИП НАРУШЕНИЯ
+        0,                                        # PrimReasonID ВИД НАРУШЕНИЯ
+        0,                                        # SysReasonID ПРИЧИНА ВОЗНИКНОВЕНИЯ НАРУШЕНИЯ
+        '',                                       # Comments КОМЕНТАРИЙ
+        '',                                       # Commitment ДОГОВОРЁННОСТЬ
+        '',                                       # Gratitude БЛАГОДАРНОСТЬ
+        int(currDate.strftime("%W")),             # AuditWeek НЕДЕЛЯ АУДИТА
+        int(currDate.strftime("%m")),             # AuditMonth МЕСЯЦ АУДИТА
+        int(currDate.strftime("%Y")),             # AuditYear ГОД АУДИТА
+        person_name,                              # LogUser КТО ЗАЛОГИНЕН
+        getLoginDate(currDate),                   # LogDate КОГДА ЗАЛОГИНЕН
+        shift                                     # AuditShift СМЕНА - ВСЕГДА 'Day'
+        ]
      return goodList
 
 
 def getBad(listOfBadPattern):
-     badList = [  makeItPast(currDate,getDelta()).date(),    # AuditDate ДАТА АУДИТА
-                    makeItPast(currDate,getDelta()).time().strftime('%H:%M'),   # AuditTime ВРЕМЯ АУДИТА
-                    person_id,                                 # ObserverID ТАБЕЛЬНЫЙ НОМЕР
-                    28,                                       # ObsDepartmentID ДЕПАРТАМЕНТ В КОТОРОМ РАБОТАЮ - ВСЕГДА 28
-                    27,                                       # ObsOpenCellID ЯЧЕЙКА К КОТОРОЙ ЗАКРЕПЛЁН - ВСЕГДА 0
-                    2,                                        # PerfDepartmentID ГДЕ ПРОВОДИЛСЯ АУДИТ - ВСЕГДА 2 
-                    0,                                        # PerfJobID ДОЛЖНОСТЬ ТОГО КОГО НАБЛЮДАЕМ - ВСЕГДА 0
-                    1,                                        # PerfTypeID ТИП РАБОТНИКА - ВСЕГДА 1
-                    None,                                     # PerfopenCellID ВСЕГДА NONE
-                    '',                                       # ContractorName ИМЯ - ВСЕГДА ""
-                    4,                                        # AuditZone ЗОНА ПРОВЕДЕНИЯ АУДИТА 
-                    listOfBadPattern[0],                      # AuditPlace МЕСТО ПРОВЕДЕНИЯ АУДИТА
-                    listOfBadPattern[1],                      # ViolIndex БЕЗОПАНЫЙ(0) ИЛИ НЕ БЕЗОПАСНЫЙ(1)
-                    listOfBadPattern[2],                      # ViolTypeID ГРУППА К КОТОРОЙ ОТНОСИТСЯ НАРУШЕНИЕ
-                    listOfBadPattern[3],                      # ViolationID ТИП НАРУШЕНИЯ
-                    9,                                        # PrimReasonID ВИД НАРУШЕНИЯ
-                    222,                                      # SysReasonID ПРИЧИНА ВОЗНИКНОВЕНИЯ НАРУШЕНИЯ
-                    '',                                       # Comments КОМЕНТАРИЙ
-                    getCommitment(),                          # Commitment ДОГОВОРЁННОСТЬ
-                    '',                                       # Gratitude БЛАГОДАРНОСТЬ
-                    int(currDate.strftime("%W")),             # AuditWeek НЕДЕЛЯ АУДИТА
-                    int(currDate.strftime("%m")),             # AuditMonth МЕСЯЦ АУДИТА
-                    int(currDate.strftime("%Y")),             # AuditYear ГОД АУДИТА
-                    person_name,                               # LogUser КТО ЗАЛОГИНЕН
-                     getLoginDate(currDate),                  # LogDate КОГДА ЗАЛОГИНЕН
-                    shift                                     # AuditShift СМЕНА - ВСЕГДА 'Day'
-                    ]
+     badList = [
+        makeItPast(currDate,getDelta()).date(),    # AuditDate ДАТА АУДИТА
+        makeItPast(currDate,getDelta()).time().strftime('%H:%M'),   # AuditTime ВРЕМЯ АУДИТА
+        person_id,                                # ObserverID ТАБЕЛЬНЫЙ НОМЕР
+        28,                                       # ObsDepartmentID ДЕПАРТАМЕНТ В КОТОРОМ РАБОТАЮ - ВСЕГДА 28
+        27,                                       # ObsOpenCellID ЯЧЕЙКА К КОТОРОЙ ЗАКРЕПЛЁН - ВСЕГДА 0
+        2,                                        # PerfDepartmentID ГДЕ ПРОВОДИЛСЯ АУДИТ - ВСЕГДА 2 
+        0,                                        # PerfJobID ДОЛЖНОСТЬ ТОГО КОГО НАБЛЮДАЕМ - ВСЕГДА 0
+        1,                                        # PerfTypeID ТИП РАБОТНИКА - ВСЕГДА 1
+        None,                                     # PerfopenCellID ВСЕГДА NONE
+        '',                                       # ContractorName ИМЯ - ВСЕГДА ""
+        4,                                        # AuditZone ЗОНА ПРОВЕДЕНИЯ АУДИТА 
+        listOfBadPattern[0],                      # AuditPlace МЕСТО ПРОВЕДЕНИЯ АУДИТА
+        listOfBadPattern[1],                      # ViolIndex БЕЗОПАНЫЙ(0) ИЛИ НЕ БЕЗОПАСНЫЙ(1)
+        listOfBadPattern[2],                      # ViolTypeID ГРУППА К КОТОРОЙ ОТНОСИТСЯ НАРУШЕНИЕ
+        listOfBadPattern[3],                      # ViolationID ТИП НАРУШЕНИЯ
+        9,                                        # PrimReasonID ВИД НАРУШЕНИЯ
+        222,                                      # SysReasonID ПРИЧИНА ВОЗНИКНОВЕНИЯ НАРУШЕНИЯ
+        '',                                       # Comments КОМЕНТАРИЙ
+        getCommitment(),                          # Commitment ДОГОВОРЁННОСТЬ
+        '',                                       # Gratitude БЛАГОДАРНОСТЬ
+        int(currDate.strftime("%W")),             # AuditWeek НЕДЕЛЯ АУДИТА
+        int(currDate.strftime("%m")),             # AuditMonth МЕСЯЦ АУДИТА
+        int(currDate.strftime("%Y")),             # AuditYear ГОД АУДИТА
+        person_name,                              # LogUser КТО ЗАЛОГИНЕН
+        getLoginDate(currDate),                   # LogDate КОГДА ЗАЛОГИНЕН
+        shift                                     # AuditShift СМЕНА - ВСЕГДА 'Day'
+        ]
      return badList
 
 
