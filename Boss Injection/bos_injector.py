@@ -170,13 +170,18 @@ oneBadTwoGoodList = getFinishList(g1, b1)
 oneBadTwoGoodList.sort(key=sortLogDate)
 
 print('Подключамся к BOS DataBase')
-#conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\arubanik\Documents\Database1.accdb;') # WIN
-#conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=\\pmintl.net\deptdata\PMI-RU-SPB-ORG\EHSS\Common\2_BEHAVIORAL AUDITS\Database tables\BOS\bos_be.mdb;') # WIN 
-#conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=\\pmintl.net\deptdata\PMI-RU-SPB-ORG\EHSS\Common\2_BEHAVIORAL AUDITS\Database tables\BOS\Bos_be.accdb;') # WIN
 conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=M:\EHSS\Support\Clients\BOS.accdb;') # WIN
 cursor = conn.cursor()
 print('Выполняем запрос...')
-cursor.executemany("INSERT INTO tblAudit(AuditDate, AuditTime, ObserverID, ObsDepartmentID, ObsOpenCellID, PerfDepartmentID, PerfJobID, PerfTypeID, PerfopenCellID, ContractorName, AuditZone, AuditPlace, ViolIndex, ViolTypeID, ViolationID, PrimReasonID,SysReasonID, Comments, Commitment, Gratitude, AuditWeek, AuditMonth, AuditYear, LogUser, LogDate, AuditShift) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", oneBadTwoGoodList)
+cursor.executemany("INSERT INTO tblAudit(AuditDate, AuditTime, ObserverID,\
+                                            ObsDepartmentID, ObsOpenCellID, PerfDepartmentID,\
+                                            PerfJobID, PerfTypeID, PerfopenCellID,\
+                                            ContractorName, AuditZone, AuditPlace,\
+                                            ViolIndex, ViolTypeID, ViolationID, \
+                                            PrimReasonID,SysReasonID, Comments, \
+                                            Commitment, Gratitude, AuditWeek, \
+                                            AuditMonth, AuditYear, LogUser, LogDate, AuditShift) \
+                                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", oneBadTwoGoodList)
 conn.commit()
 cursor.execute('select * from tblAudit')
 print('Выполнено')
