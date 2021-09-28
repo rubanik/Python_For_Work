@@ -153,13 +153,13 @@ def getBad(listOfBadPattern):
 
 def sortLogDate(i):
     return i[n]
-currDate = datetime.datetime.now() # Get current date
-AuditDate = makeItPast(currDate,getDelta())
 
 
 def getCommitment():
     return listOfCommitments[getRandom(4)]
 
+currDate = datetime.datetime.now() # Get current date
+AuditDate = makeItPast(currDate,getDelta())
 
 #Генерируем списки с записями хороший\плохой
 g1 = [getGood(x) for x in listOfGoodPatterns]
@@ -187,6 +187,7 @@ cursor.executemany("INSERT INTO tblAudit(AuditDate, AuditTime, ObserverID,\
                                             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", oneBadTwoGoodList)
 conn.commit()
 cursor.execute('select * from tblAudit')
+conn.close()
 print('Выполнено')
 
 
